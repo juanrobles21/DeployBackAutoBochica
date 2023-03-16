@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SQL_VEHICLES_UPDATE = void 0;
+exports.SQL_VEHICLES_UPDATE = {
+    CONFIRMARVEHICLE: "SELECT COUNT(veh.id_vehicle) AS amount\
+    FROM vehicle veh \
+    WHERE lower(veh.license_plate)=lower($2)",
+    UPDATE: 'UPDATE vehicle SET  type_vehicle=$2, license_plate=$3, expiration_soat =$4,expiration_tecnomechanic=$5 WHERE id_vehicle=$1'
+};
