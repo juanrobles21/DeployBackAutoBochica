@@ -6,22 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
-const StratumRoutes_1 = __importDefault(require("../../routes/StratumRoutes"));
-const SisbenRoutes_1 = __importDefault(require("../../routes/SisbenRoutes"));
-const CivilStatusroutes_1 = __importDefault(require("../../routes/CivilStatusroutes"));
-const EducationLevelRoutes_1 = __importDefault(require("../../routes/EducationLevelRoutes"));
-const cityRoutes_1 = __importDefault(require("../../routes/cityRoutes"));
-const TypeDocumentRoutes_1 = __importDefault(require("../../routes/TypeDocumentRoutes"));
-const TypeGenderRoutes_1 = __importDefault(require("../../routes/TypeGenderRoutes"));
-const TypeSanguinRoutes_1 = __importDefault(require("../../routes/TypeSanguinRoutes"));
-const PersonRoutes_1 = __importDefault(require("../../routes/PersonRoutes"));
-const userAccessRoutes_1 = __importDefault(require("../../routes/userAccessRoutes"));
-const RolesRoutes_1 = __importDefault(require("../../routes/RolesRoutes"));
-const UserRoutes_1 = __importDefault(require("../../routes/UserRoutes"));
-const VehiclesRoutes_1 = __importDefault(require("../../routes/VehiclesRoutes"));
-const CoursesRoutes_1 = __importDefault(require("../../routes/CoursesRoutes"));
-const TuitionsRoutes_1 = __importDefault(require("../../routes/TuitionsRoutes"));
-const StateCertificateRoutes_1 = __importDefault(require("../../routes/StateCertificateRoutes"));
+const PersonRoute_1 = __importDefault(require("../../routes/PersonRoute"));
+const RoleRoute_1 = __importDefault(require("../../routes/RoleRoute"));
+const UserRoute_1 = __importDefault(require("../../routes/UserRoute"));
+const VehicleRoute_1 = __importDefault(require("../../routes/VehicleRoute"));
+const UserAccessRoute_1 = __importDefault(require("../../routes/UserAccessRoute"));
+const CourseRoute_1 = __importDefault(require("../../routes/CourseRoute"));
+const Safety_1 = __importDefault(require("../../middleware/Safety"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -36,23 +27,13 @@ class Server {
         this.app.use(express_1.default.urlencoded({ extended: true }));
     }
     activeRoute() {
-        this.app.use('/api/public', userAccessRoutes_1.default);
-        this.app.use('/api/private/stratum', StratumRoutes_1.default);
-        this.app.use('/api/private/stratum', StratumRoutes_1.default);
-        this.app.use('/api/private/sisben', SisbenRoutes_1.default);
-        this.app.use('/api/private/civilstatus', CivilStatusroutes_1.default);
-        this.app.use('/api/private/educationlevel', EducationLevelRoutes_1.default);
-        this.app.use('/api/private/city', cityRoutes_1.default);
-        this.app.use('/api/private/typedocument', TypeDocumentRoutes_1.default);
-        this.app.use('/api/private/typegender', TypeGenderRoutes_1.default);
-        this.app.use('/api/private/typesanguineos', TypeSanguinRoutes_1.default);
-        this.app.use('/api/private/person', PersonRoutes_1.default);
-        this.app.use('/api/private/roles', RolesRoutes_1.default);
-        this.app.use('/api/private/user', UserRoutes_1.default);
-        this.app.use('/api/private/vehicles', VehiclesRoutes_1.default);
-        this.app.use('/api/private/course', CoursesRoutes_1.default);
-        this.app.use('/api/private/tuitions', TuitionsRoutes_1.default);
-        this.app.use('/api/private/statecertificate', StateCertificateRoutes_1.default);
+        this.app.use('/api/public', UserAccessRoute_1.default);
+        this.app.use('/api/private/person', PersonRoute_1.default);
+        this.app.use('/api/private/course', Safety_1.default.verificarToken, CourseRoute_1.default);
+        this.app.use('/api/private/roles', Safety_1.default.verificarToken, RoleRoute_1.default);
+        this.app.use('/api/public/user', UserAccessRoute_1.default);
+        this.app.use('/api/private/user', Safety_1.default.verificarToken, UserRoute_1.default);
+        this.app.use('/api/private/vehicle', Safety_1.default.verificarToken, VehicleRoute_1.default);
     }
     start() {
         this.app.listen(this.app.get("PORT"), () => {
