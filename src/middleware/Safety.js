@@ -16,8 +16,8 @@ class Safety {
         else {
             try {
                 const llavePrivada = String(process.env.PASSWORD_ULTRA_SECRET);
-                const tokenHitData = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
-                const datos = jsonwebtoken_1.default.verify(tokenHitData, 'LaClaveVaAqui');
+                const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+                const datos = jsonwebtoken_1.default.verify(token, llavePrivada);
                 req.body.datosUsuario = datos;
                 next();
             }
