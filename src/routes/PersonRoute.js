@@ -20,9 +20,9 @@ class PersonRoutes {
         this.routesApiPerson.get("/view", ToListController_1.default.getMePerson);
         this.routesApiPerson.post("/create", CreateController_1.default.createMePerson);
         this.routesApiPerson.get("/details/:idPerson", DetailsController_1.default.DetailsOne);
-        this.routesApiPerson.get("/detailsEXCEL", ToListEXCELController_1.default.getMePerson);
-        this.routesApiPerson.get("/detailsCertificateEXCEL", ToListEXCELController_1.default.filterPersonCertificateEXCEL);
-        this.routesApiPerson.get("/detailsNoCertificateEXCEL", ToListEXCELController_1.default.filterPersonNoCertificateEXCEL);
+        this.routesApiPerson.get("/detailsexcel", ToListEXCELController_1.default.getMePerson);
+        this.routesApiPerson.get("/detailscertificateexcel", ToListEXCELController_1.default.filterPersonCertificateEXCEL);
+        this.routesApiPerson.get("/detailsnocertificateexcel", ToListEXCELController_1.default.filterPersonNoCertificateEXCEL);
         this.routesApiPerson.get("/filtercertificate", FilterController_1.default.filterPersonCertificate);
         this.routesApiPerson.get("/filternocertificate", FilterController_1.default.filterPersonNoCertificate);
         this.routesApiPerson.delete("/delete/:idPerson", DeleteController_1.default.deletePerson);
